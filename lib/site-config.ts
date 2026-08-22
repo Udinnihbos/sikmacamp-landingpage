@@ -1,5 +1,5 @@
 export const SITE = {
-  serverIp: "play.sikmacamp.my.id",
-  discordUrl: "https://discord.gg/MG7EeW44A",
+  serverIp: "play.sikmacamp.net",
+  discordUrl: "https://discord.gg/replace-me",
   communityUrl: "https://replace-me.lovable.app",
 };
