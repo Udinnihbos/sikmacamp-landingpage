@@ -4,13 +4,34 @@ Landing page server Minecraft survival RPG SikmaCamp. Dibangun dengan Next.js 14
 
 ## Sebelum deploy
 
-Ganti dulu 3 nilai ini di `app/page.tsx` (baris paling atas):
+Ganti nilai ini di `lib/site-config.ts` (dipakai di semua halaman):
 
 ```ts
-const SERVER_IP = "play.sikmacamp.net";       // ganti ke IP server asli
-const DISCORD_URL = "https://discord.gg/...";  // ganti ke invite link Discord
-const COMMUNITY_URL = "https://....lovable.app"; // ganti ke URL SikmaCamp Community
+export const SITE = {
+  serverIp: "play.sikmacamp.net",       // ganti ke IP server asli
+  discordUrl: "https://discord.gg/...",  // ganti ke invite link Discord
+  communityUrl: "https://....lovable.app", // ganti ke URL SikmaCamp Community
+};
 ```
+
+## Nambah produk di Store
+
+Edit `data/products.ts`. Tiap produk itu satu object di array `PRODUCTS`,
+tinggal copy-paste blok yang ada, ganti isinya, save, lalu push. Ada
+komentar di paling atas file yang jelasin field-fieldnya. Kalau mau nambah
+kategori baru (selain Key / Mystery Box / Rank / Cosmetic), tambahin juga
+di array `CATEGORIES`.
+
+Belum ada payment gateway — tombol "Beli" masih ngarah ke Discord. Kalau
+nanti mau transaksi otomatis, itu perlu backend + payment provider (misal
+Midtrans/Xendit) yang terpisah dari project static ini.
+
+## Ganti data Leaderboard
+
+Edit `data/leaderboard.ts` — array `PLAYERS`. Ini masih data manual;
+kalau nanti mau ambil dari data server asli, tinggal ganti isi array itu
+jadi hasil `fetch()` di `app/leaderboard/page.tsx` (strukturnya udah
+disiapin biar gampang disambungin).
 
 ## Coba di lokal (opsional)
 
@@ -59,10 +80,33 @@ Setiap kali kamu `git push` ke branch `main`, Vercel otomatis build & deploy ula
 
 ```
 app/
-  layout.tsx      # font & metadata
-  page.tsx        # isi landing page (ganti copy di sini)
+  layout.tsx           # font & metadata
+  page.tsx             # halaman utama (Home)
+  store/page.tsx        # halaman Store
+  leaderboard/page.tsx   # halaman Leaderboard
   globals.css
 components/
-  CopyIp.tsx      # tombol salin IP server
-  RarityCard.tsx  # kartu fitur gaya tooltip item
+  NavBar.tsx           # navigasi, dipakai semua halaman
+  Footer.tsx           # footer, dipakai semua halaman
+  CopyIp.tsx           # tombol salin IP server
+  RarityCard.tsx       # kartu fitur gaya tooltip item (halaman Home)
+  ProductCard.tsx      # kartu produk (halaman Store)
+data/
+  products.ts          # <- edit di sini buat nambah/ubah produk store
+  leaderboard.ts        # <- edit di sini buat ubah data leaderboard
+lib/
+  site-config.ts        # IP server, link Discord & Community
+  rarity.ts             # mapping warna badge rarity (dipakai di semua kartu)
 ```
+
+## Nambah halaman baru
+
+Cara paling gampang: bikin folder baru di dalam `app/`, isi dengan file
+`page.tsx`. Contoh, biar ada halaman `/rules`:
+
+```
+app/rules/page.tsx
+```
+
+Next.js otomatis bikin route `sikmacamp.com/rules` dari struktur folder
+itu — gak perlu setting routing manual.
