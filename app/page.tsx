@@ -11,7 +11,7 @@ export default function Home() {
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-10 sm:pt-16">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brass">
-          SikmaCamp Community
+          SikmaCampT Community
         </p>
         <h1 className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-6xl">
           Satu komunitas.
@@ -19,7 +19,7 @@ export default function Home() {
           <span className="text-muted">Banyak alasan buat balik lagi.</span>
         </h1>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-          SikmaCamp dibangun buat yang main serius dan temenan beneran —
+          SikmaCampT dibangun buat yang main serius dan temenan beneran —
           bukan sekadar numpang lewat. Ada server survival RPG-nya, ada
           tempat ngobrolnya, ada tokonya. Semua di satu rumah yang sama.
         </p>
